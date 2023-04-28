@@ -20,22 +20,25 @@ import InputScreen from './src/component/InputScreen';
 
 function App(): JSX.Element {
 
-  const [code, setCode] = useState<string|undefined>();
-  const [number, setNumber] = useState<string|undefined>();
+  const [code, setCode] = useState<string | undefined>();
+  const [number, setNumber] = useState<string | undefined>();
   const [screenName, setScreenName] = useState<string>("inputScreen");
-  // useEffect(() => {
-  //   getHash().then(hash => {
-  //     console.log("hash", hash)
-  //     // use this hash in the message.
-  //   }).catch(console.log);
+  useEffect(() => {
+    getHash().then(hash => {
+      console.log("hash", hash)
+      // use this hash in the message.
+    }).catch(console.log);
 
-  //   startOtpListener(message => {
-  //     // extract the otp using regex e.g. the below regex extracts 6 digit otp from message
-  //     const otp = /(\d{6})/g.exec(message)[1];
-  //     setCode("" + otp);
-  //   });
-  //   return () => removeListener();
-  // }, []);
+    startOtpListener((message) => {
+      // extract the otp using regex e.g. the below regex extracts 6 digit otp from message
+      const otp =  /(\d{6})/g.exec(message)?.[1] ;
+      // const regex = /(\d{6})/g;
+      // const match = regex.exec(message)||"";
+      // const otp = match[1];
+      setCode("" + otp);
+    });
+    return () => removeListener();
+  }, []);
 
   return (
     <SafeAreaView >
@@ -44,34 +47,15 @@ function App(): JSX.Element {
         backgroundColor={"#03DAC6"}
       />
       {
-        screenName=="inputScreen"
-        ? <InputScreen setScreenName={setScreenName} setNumber={setNumber} number={number} />
-        :<OTPScreen code={code} setCode={setCode} number={number} setScreenName={setScreenName}/>
+        screenName == "inputScreen"
+          ? <InputScreen setScreenName={setScreenName} setNumber={setNumber} number={number} />
+          : <OTPScreen code={code} setCode={setCode} number={number} setScreenName={setScreenName} />
       }
-      
+
     </SafeAreaView>
   );
 }
 export default App;
-
-
-
-
-
-
-
-
-
-
-// const TestComponent = () => {
-//   const { color } = useTheme()
-//   const dispatch = useDispatch()
-//   const c = useColorModeValue("#000", "#fff")
-//   console.log("color", c)
-//   const [code, setCode] = useState("")
-
-
-
 
 
 

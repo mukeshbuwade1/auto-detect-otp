@@ -5957,6 +5957,11 @@
     "jscodeshift" "^0.13.1"
     "nullthrows" "^1.1.1"
 
+"react-native-device-number@^1.0.7":
+  "integrity" "sha512-G1V1DulmaTVvnwdhvZDB8XqbjVyu7S6GuU22HhFUfJ6rSryhgS6u+Aj9M5qEMlpyFb5nEk6ADIPcp6eFH0csVg=="
+  "resolved" "https://registry.npmjs.org/react-native-device-number/-/react-native-device-number-1.0.7.tgz"
+  "version" "1.0.7"
+
 "react-native-gradle-plugin@^0.71.15":
   "integrity" "sha512-7S3pAuPaQJlhax6EZ4JMsDNpj05TfuzX9gPgWLrFfAIWIFLuJ6aDQYAZy2TEI9QJALPoWrj8LWaqP/DGYh14pw=="
   "resolved" "https://registry.npmjs.org/react-native-gradle-plugin/-/react-native-gradle-plugin-0.71.15.tgz"

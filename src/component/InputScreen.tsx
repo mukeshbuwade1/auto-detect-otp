@@ -1,6 +1,7 @@
 import { StyleSheet, Text, TextInput, TouchableOpacity, View, Dimensions, Alert } from 'react-native'
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import axios from 'axios'
+import DeviceNumber from 'react-native-device-number';
 
 const { width, height } = Dimensions.get("window");
 
@@ -11,12 +12,27 @@ interface propsType {
 }
 const InputScreen: React.FC<propsType> = ({ setScreenName, setNumber, number }) => {
 
+    useEffect(() => {
+        getDeviceNumber()
+    }, [])
+
+    const getDeviceNumber = async () => {
+        try {
+            let res = await DeviceNumber.get()
+            if (res?.mobileNumber)
+                setNumber(res.mobileNumber)
+            else
+                Alert.alert("Opps!","something went to wrong")
+        } catch (error) {
+            console.log(`error ${error}`);
+        }
+    }
 
     function submit() {
         var data = JSON.stringify({
             "originator": "SignOTP",
             "recipient": number,
-            "content": "Greetings from Mukesh(app developer), this is a testing code your mobile verification code is: {}.  7KPdjHs9uGM",
+            "content": "Greetings from Mukesh(app developer), this is a testing code your mobile verification code is: {}.  xFEf8+VmuH9",
             "expiry": "600",
             "data_coding": "text"
         });
@@ -33,6 +49,7 @@ const InputScreen: React.FC<propsType> = ({ setScreenName, setNumber, number }) 
         getOtp(config)
     }
     const getOtp = async (config: object) => {
+
         await axios(config)
             .then(function (response) {
                 console.log(JSON.stringify(response.data));
@@ -84,7 +101,7 @@ const InputScreen: React.FC<propsType> = ({ setScreenName, setNumber, number }) 
                 </TouchableOpacity>
 
             </View>
-        </View>        
+        </View>
     )
 }
 
